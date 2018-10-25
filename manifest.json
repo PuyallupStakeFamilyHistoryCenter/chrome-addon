@@ -1,0 +1,26 @@
+{
+    "name": "Puyallup Family History Center Names Generator",
+    "version": "1.0",
+    "description": "This addon allows you to generate a Microsoft Word document containing a list of reserved temple names found on FamilySearch.",
+    "permissions": ["tabs","declarativeContent","<all_urls>", "downloads"],
+    "background": {
+		"scripts": ["background.js"],
+		"persistent": false
+    },
+    "page_action": {
+		"default_popup": "popup.html",
+		"default_icon": {
+			"16": "images/icon-16.png",
+			"32": "images/icon-32.png",
+			"48": "images/icon-48.png",
+			"128": "images/icon-128.png"
+		}
+    },
+    "icons": {
+    	"16": "images/icon-16.png",
+		"32": "images/icon-32.png",
+		"48": "images/icon-48.png",
+		"128": "images/icon-128.png"
+    },
+    "manifest_version": 2
+}
