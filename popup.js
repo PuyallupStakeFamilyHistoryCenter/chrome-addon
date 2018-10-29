@@ -1,11 +1,15 @@
 chrome.runtime.onMessage.addListener(function(request, sender) {
 	if (request.action == "getSource") {
-		console.log(request);
 		heading.innerText = request.heading;
 		message.innerText = request.message;
-		downloadLink.href = request.source;
 		namesBlob = new Blob([request.blob], {type: 'text/html'});
 		downloadLink.style.display = "block";
+		processNamesBtn.style.display = 'none';
+	}
+	
+	if(request.action == "sourceError") {
+		heading.innerText = request.heading;
+		message.innerText = request.message;
 		processNamesBtn.style.display = 'none';
 	}
 });
@@ -21,8 +25,10 @@ processNamesBtn.onclick = function(element) {
 		chrome.tabs.executeScript(tabs[0].id, {file: "page-source.js"}, function() {
 		    // If you try and inject into an extensions page or the webstore/NTP you'll get an error
 		    if (chrome.runtime.lastError) {
-			 	heading.innerText = 'Oops!'
-		    	message.innerText = 'There was an error injecting script : \n' + chrome.runtime.lastError.message;
+			 	heading.innerText = 'Oops!';
+		    	message.innerText = 'Please go to https://www.familysearch.org and log in to use this extension.';
+		    	processNamesBtn.style.display = 'none';
+		    	console.log('There was an error injecting script: ' + chrome.runtime.lastError.message);
 		    }
 		});
 	});
